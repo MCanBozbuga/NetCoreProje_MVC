@@ -27,6 +27,8 @@
                             <th>DESCRIPTION</th>
                             <th>STATUS</th>
                             <th>TOTAL PRODUCT</th>
+                            <th>CREATE DATE</th>
+                            <th>UPDATE DATE</th>
                             <th>UPDATE / DELETE</th>
                         </tr>
                     </thead>
@@ -41,7 +43,8 @@
                                         <td>@category.CategoryName</td>
                                         <td>@category.ProductName</td>
                                         <td>@category.Description</td>
-                                        @{
+                                        <td>@category.Status</td>
+                                        @*@{
                                             switch (category.Status)
                                             {
                                                 case Core.Entities.Enum.DataStatus.Inserted:
@@ -56,8 +59,10 @@
                                         }
                                         <td>
                                             INSERTED
-                                        </td>
+                                        </td>*@
                                         <td>@category.UnitsInStock</td>
+                                        <td>@category.CreateDate</td>
+                                        <td>@category.DeleteData</td>
                                         <td>
                                             <a asp-action="Update" asp-controller="Category" asp-route-id="@category.CategoryId" class="btn btn-warning">update</a>
                                             <a asp-action="Delete" asp-controller="Category" asp-route-id="@category.CategoryId" class="btn btn btn-danger">delete</a>

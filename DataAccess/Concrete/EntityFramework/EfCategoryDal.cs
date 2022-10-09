@@ -32,6 +32,9 @@ namespace DataAccess.Concrete.EntityFramework
                              UnitsInStock = p.UnitsInStock,
                              ProductName = p.ProductName,
                              Status = c.Status,
+                             CreateDate = c.CreatedDate,
+                             UpdateDate = c.ModifiedDate,
+                             DeleteData = c.DeletedDate,
 
                          };
             return result.ToList();

@@ -24,6 +24,8 @@ namespace Core.DataAccess.EntityFramework
         {
             if (entity != null)
             {
+                entity.CreatedDate = DateTime.Now;
+               
                 _entities.Add(entity);
                 SaveChanges();
             }
@@ -33,6 +35,8 @@ namespace Core.DataAccess.EntityFramework
         {
             if (entity != null)
             {
+                entity.DeletedDate = DateTime.Now;
+                entity.Status = Entities.Enum.DataStatus.Deleted;
                 _entities.Remove(entity);
                 SaveChanges();
             }
@@ -60,6 +64,8 @@ namespace Core.DataAccess.EntityFramework
         {
             if (entity != null)
             {
+                entity.ModifiedDate = DateTime.Now;
+                entity.Status = Core.Entities.Enum.DataStatus.Updated;
                 _context.Entry(entity).State = EntityState.Modified;
                 SaveChanges();
                 //todo: veri güncelleme işleminde de savechanges() bize "veri kaydedildi" değerini döndürecek. isterseniz bu metodu değiştirebilirsiniz.

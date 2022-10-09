@@ -51,7 +51,7 @@ namespace WebUI.Areas.Admin.Controllers
             return View(updateCategory);
         }
         [HttpPost]
-        IActionResult Update(Category category)
+        public IActionResult Update(Category category)
         {
             categoryService.UpdateCategory(category);
             return RedirectToAction("Index");

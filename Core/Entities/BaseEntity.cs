@@ -9,7 +9,7 @@ namespace Core.Entities
     {
         public BaseEntity()
         {
-            CreatedDate = DateTime.Now;
+        
             Discontinued = true;
             Status = DataStatus.Inserted;
         }

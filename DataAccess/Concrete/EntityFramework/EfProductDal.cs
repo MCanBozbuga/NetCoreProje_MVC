@@ -36,6 +36,11 @@ namespace DataAccess.Concrete.EntityFramework
                              Status = p.Status,
                              Description = p.Description,
                              ImagePath = p.ImagePath,
+                             CreateDate = p.CreatedDate,
+                             UpdateDate = p.ModifiedDate,
+                             DeleteData = p.DeletedDate,
+
+                             
                          }; //Sonucu bu kolonlara göre ver
             return result.ToList();
 

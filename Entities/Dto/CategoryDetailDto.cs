@@ -13,5 +13,8 @@ namespace Entities.Dto
         public short UnitsInStock { get; set; }
         public string ProductName { get; set; }
         public DataStatus  Status { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public DateTime? DeleteData { get; set; }
     }
 }

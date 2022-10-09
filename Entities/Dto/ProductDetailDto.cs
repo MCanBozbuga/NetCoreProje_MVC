@@ -16,6 +16,10 @@ namespace Entities.Dto
         public DataStatus Status { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public DateTime? DeleteData { get; set; }
+
 
     }
 }
