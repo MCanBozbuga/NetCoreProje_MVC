@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_DasboardLayout.cshtml";
+    
 }
 
 <div class="row">
@@ -45,24 +46,26 @@
                                         <td>@category.Description</td>
                                         <td>@category.Status</td>
                                         @*@{
-                                            switch (category.Status)
-                                            {
-                                                case Core.Entities.Enum.DataStatus.Inserted:
-                                                    break;
-                                                case Core.Entities.Enum.DataStatus.Updated:
-                                                    break;
-                                                case Core.Entities.Enum.DataStatus.Deleted:
-                                                    break;
-                                                default:
-                                                    break;
+                                                switch (category.Status)
+                                                {
+                                                    case Core.Entities.Enum.DataStatus.Inserted:
+                                                        break;
+                                                    case Core.Entities.Enum.DataStatus.Updated:
+                                                        break;
+                                                    case Core.Entities.Enum.DataStatus.Deleted:
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
                                             }
-                                        }
-                                        <td>
-                                            INSERTED
-                                        </td>*@
+                                            <td>
+                                                INSERTED
+                                            </td>*@
                                         <td>@category.UnitsInStock</td>
+
+
                                         <td>@category.CreateDate</td>
-                                        <td>@category.DeleteData</td>
+                                        <td>@category.UpdateDate</td>
                                         <td>
                                             <a asp-action="Update" asp-controller="Category" asp-route-id="@category.CategoryId" class="btn btn-warning">update</a>
                                             <a asp-action="Delete" asp-controller="Category" asp-route-id="@category.CategoryId" class="btn btn btn-danger">delete</a>

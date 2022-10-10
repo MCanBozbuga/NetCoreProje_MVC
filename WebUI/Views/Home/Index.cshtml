@@ -3,17 +3,7 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<div id="genel" class="container">
-    <div class="text-center">
-        <h1 class="display-4">WELCOME TO KAPADOKYA</h1>
-        <div class="flex-md-column">
-           
-        </div>
-       
 
-
-    </div>
-</div>*@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -43,7 +33,9 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            <div class="text-center">
+                                <a asp-action="AddToCart" asp-controller="Home" asp-route-id="@product.ProductId" class="btn btn-outline-dark mt-auto">Add To Cart</a>
+                            </div>
                         </div>
                     </div>
                 </div>

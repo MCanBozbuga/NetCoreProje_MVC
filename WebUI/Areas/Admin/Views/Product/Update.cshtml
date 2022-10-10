@@ -15,13 +15,30 @@
             <!-- form start -->
             <form method="post">
                 <div class="card-body">
+                    @Html.HiddenFor(m=>m.CreatedDate)
                     <div class="form-group">
-                        <label>PRODUCT Name</label>
-                        <input asp-for="ProductName" type="text" class="form-control" placeholder="Enter category name" value="@Model.ProductName">
+                        <label>PRODUCT NAME</label>
+                        <input asp-for="ProductName" type="text" class="form-control" placeholder="Enter product name">
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <input asp-for="Description" type="text" class="form-control" placeholder="Enter category description" value="@Model.Description">
+                        <label>DESCRIPTION</label>
+
+                        <input asp-for="Description" type="text" class="form-control" placeholder="Enter product description">
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>UNITS IN STOCK</label>
+                        <input asp-for="UnitsInStock" type="number" class="form-control" placeholder="Enter product UnitsInStock">
+                    </div>
+                    <div class="form-group">
+                        <label>UNIT PRICE</label>
+                        <input asp-for="UnitPrice" type="number" class="form-control" placeholder="Enter product UnitPrice">
+                    </div>
+                    <div class="form-group">
+                        <label>CATEGORY NAME</label>
+                        <select asp-items="@ViewBag.Categories" asp-for="CategoryId" class="form-control custom-select">
+                            <option selected="" disabled>PLEASE SELECT CATEGORY</option>
+                        </select>
                     </div>
                 </div>
                 <!-- /.card-body -->

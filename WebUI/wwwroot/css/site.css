@@ -2,7 +2,11 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 
+#resimm{
+    width:10px;
+    height:10px;
 
+}
 
 .navbar-light .navbar-brand {
 

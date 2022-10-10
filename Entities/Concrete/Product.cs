@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Entities.Concrete
@@ -12,6 +13,8 @@ namespace Entities.Concrete
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
         public short UnitsInStock { get; set; }
+        //[Required(ErrorMessage = "Boş geçme")]
+        //[MaxLength(50, ErrorMessage = "20 haneli olmalı")]
         public string Description { get; set; }
         public string ImagePath { get; set; }
 

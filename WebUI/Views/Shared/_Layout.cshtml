@@ -25,16 +25,25 @@ tom box-shadow mb-3">
                         <li class="nav-item">
                             <i><b><a class="btn btn-secondary" asp-area="" asp-controller="Home" asp-action="Index">HOME</a></b></i>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">TEACHER</a>
-                        </li>*@
-                        @*<li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Category" asp-action="Index">ADMIN SAYFASI CATEGORY</a>
-                        </li>*@
                         <li class="nav-item">
                             <i><b><a class="btn btn-danger ml-2" asp-area="Admin" asp-controller="Home" asp-action="Index">ADMIN PAGE</a></b></i>
                         </li>
                     </ul>
+                    <form class="d-flex">
+                        <a asp-action="MyCart" asp-controller="Home" class="btn btn-primary">
+                            <i class="bi-cart-fill me-1"></i>
+                            SHOPPING CART
+                            <img  src="/images/avm.jpg" width="30" height="30" />
+                            @{
+                                if (TempData["sepet"] != null)
+                                {
+                                    var sepet = TempData["sepet"] as WebUI.Models.Cart;
+                                    <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                        @sepet.MyCart.Count
+                                    </span>
+                                } }
+                        </a>
+                    </form>
                     <partial name="_LoginPartial" />
                 </div>
             </div>

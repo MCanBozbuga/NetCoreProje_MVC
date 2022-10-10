@@ -40,13 +40,13 @@ namespace WebUI
            
 
             // Kimlik Yönetimi
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ProjectContext>();
             // MVC
             services.AddControllersWithViews();
 
 
-            #region //IdentityUser nesnesi içerisinde bulunan varsayýlan þifre tanýmlamalarýný deðiþtirdik.
+            //#region //IdentityUser nesnesi içerisinde bulunan varsayýlan þifre tanýmlamalarýný deðiþtirdik.
             //services.Configure<IdentityOptions>(x =>
             //{
             //    x.Password.RequireDigit = false;
@@ -54,16 +54,15 @@ namespace WebUI
             //    x.Password.RequireNonAlphanumeric = false;
             //    x.Password.RequireUppercase = false;
             //    x.Password.RequireLowercase = false;
-            //}); 
-            #endregion
+            //});
+            //#endregion
 
 
-            //Cokie
             services.ConfigureApplicationCookie(x =>
             {
 
-                x.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Category");
-                x.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Index");
+                x.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Home/Index");
+                x.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Privacy");
                 x.Cookie = new Microsoft.AspNetCore.Http.CookieBuilder
                 {
                     Name = "YZL3159_cookie"
@@ -72,13 +71,20 @@ namespace WebUI
                 x.ExpireTimeSpan = TimeSpan.FromMinutes(100);
             });
 
-          // Servisler  
-          //todo: IoC Container ile düzeltilecek.
-          services.AddScoped<ICategoryService, CategoryManager>();
+            // Servisler  
+            //todo: IoC Container ile düzeltilecek.
+            services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
 
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IProductDal, EfProductDal>();
+
+            // Session
+            services.AddSession(x =>
+            {
+                x.Cookie.Name = "project_cart";
+                x.IdleTimeout = TimeSpan.FromMinutes(100);
+            });
         }
 
 
@@ -99,6 +105,8 @@ namespace WebUI
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();

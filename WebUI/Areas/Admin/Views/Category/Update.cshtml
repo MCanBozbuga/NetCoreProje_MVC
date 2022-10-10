@@ -16,6 +16,7 @@
             <form method="post">
                 <div class="card-body">
                     <div class="form-group">
+                        @Html.HiddenFor(m=>m.CreatedDate)
                         <label>Category Name</label>
                         <input asp-for="CategoryName" type="text" class="form-control" placeholder="Enter category name" value="@Model.CategoryName">
                     </div>

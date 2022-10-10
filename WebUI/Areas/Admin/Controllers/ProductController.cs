@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,13 @@ namespace WebUI.Areas.Admin.Controllers
     {
         private readonly IProductService productService;
 
-        public ProductController(IProductService productService)
+        private readonly ICategoryService categoryService;
+
+
+        public ProductController(IProductService productService , ICategoryService categoryService)
         {
             this.productService = productService;
+            this.categoryService = categoryService;
         }
         public IActionResult Index()
         {
@@ -28,6 +33,12 @@ namespace WebUI.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
+            ViewBag.Categories = categoryService.GetAllCategories()
+                .Select(x => new SelectListItem()
+                {
+                    Text = x.CategoryName,
+                    Value = x.Id.ToString()
+                });
             TempData["Title"] = "CREATE PRODUCT";
             return View();
         }
@@ -45,6 +56,12 @@ namespace WebUI.Areas.Admin.Controllers
         }
         public IActionResult Update(int id)
         {
+            ViewBag.Categories = categoryService.GetAllCategories()
+               .Select(x => new SelectListItem()
+               {
+                   Text = x.CategoryName,
+                   Value = x.Id.ToString()
+               });
             var product = productService.Get(id);
             productService.UpdateProduct(product);
             return View(product);

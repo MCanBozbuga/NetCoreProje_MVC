@@ -21,7 +21,9 @@
                     </div>
                     <div class="form-group">
                         <label>DESCRIPTION</label>
-                        <input asp-for="Description" type="text" class="form-control" placeholder="Enter product description">
+                      
+                       <input asp-for="Description"  type="text" class="form-control" placeholder="Enter product description">
+                        <span asp-validation-for="Description"></span>
                     </div>
                     <div class="form-group">
                         <label>UNITS IN STOCK</label>
@@ -32,8 +34,10 @@
                         <input asp-for="UnitPrice" type="number" class="form-control" placeholder="Enter product UnitPrice">
                     </div>
                     <div class="form-group">
-                        <label>CATEGORY ID</label>
-                        <input asp-for="Category.Id" type="text" class="form-control" placeholder="Enter category id">
+                        <label>CATEGORY NAME</label>
+                        <select asp-items="@ViewBag.Categories" asp-for="CategoryId" class="form-control custom-select">
+                            <option selected="" disabled>PLEASE SELECT CATEGORY</option>
+                        </select>
                     </div>
 
                 </div>
