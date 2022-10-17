@@ -3,6 +3,7 @@ using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.EntityFramework.Context;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,9 +40,9 @@ namespace WebUI
        
            
 
-            // Kimlik Yönetimi
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ProjectContext>();
+            // Kimlik Yönetimi  -- AddRole eklenmek gerekiyor rol iþlemleri için. IdentityRole'den AppUserRole çektik.
+            services.AddIdentity<AppUser,AppUserRole>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<AppUserRole>()
+                .AddEntityFrameworkStores<ProjectContext>().AddDefaultTokenProviders();
             // MVC
             services.AddControllersWithViews();
 
@@ -62,13 +63,13 @@ namespace WebUI
             {
 
                 x.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Home/Index");
-                x.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Privacy");
+                //x.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Privacy");
                 x.Cookie = new Microsoft.AspNetCore.Http.CookieBuilder
                 {
                     Name = "YZL3159_cookie"
                 };
                 x.SlidingExpiration = true;
-                x.ExpireTimeSpan = TimeSpan.FromMinutes(100);
+                x.ExpireTimeSpan = TimeSpan.FromMinutes(9);
             });
 
             // Servisler  
@@ -78,6 +79,12 @@ namespace WebUI
 
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IProductDal, EfProductDal>();
+
+            services.AddScoped<IOrderService, OrderManager>();
+            services.AddScoped<IOrderDal, EfOrderDal>();
+
+            services.AddScoped<IOrderDetailService, OrderDetailManager>();
+            services.AddScoped<IOrderDetailDal, EfOrderDetailDal>();
 
             // Session
             services.AddSession(x =>
@@ -113,6 +120,7 @@ namespace WebUI
 
             app.UseEndpoints(endpoints =>
             {
+                //Area route
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(
@@ -120,11 +128,15 @@ namespace WebUI
                       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                     );
                 });
-
+                //Confirmation route
+                endpoints.MapControllerRoute(
+                    name: "confirmation",
+                    pattern: "{controller=Membership}/{action=Confirmation}/{id}/{registerCode}");
+                //default route
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+                //endpoints.MapRazorPages();
             });
         }
     }

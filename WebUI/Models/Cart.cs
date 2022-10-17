@@ -29,6 +29,16 @@ namespace WebUI.Models
             }
             _myCart.Add(item.Id, item);
         }
+        public void IncreaseItem(CartItem item)
+        {
+           
+            return;
+        }
+        public void DeleteItem(CartItem cartItem)
+        {
+            _myCart.Remove(cartItem.Id);
+            return;
+        }
 
 
 

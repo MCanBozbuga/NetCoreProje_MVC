@@ -14,9 +14,12 @@
                     <table class="table table-danger table-striped">
                         <thead>
                             <tr>
-                                <<th><i>PRODUCT</i></th>
+                                <
+                                <th><i>PRODUCT</i></th>
                                 <th><i>QUANTITY</i></th>
                                 <th><i>PRICE</i></th>
+                                @*<th><i>EDIT</i></th>*@
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -24,12 +27,24 @@
                             @foreach (var item in Model)
                             {
                                 totalPrice += item.SubTotal;
-                                <tr>
-                                    <td>@item.ProductName</td>
-                                    <td>@item.Quantity</td>
-                                    <td>@item.UnitPrice</td>
-                                    <td></td>
-                                </tr>
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.UnitPrice</td>
+                                @*<td>
+            <div>
+                <input type="number" class="form-control" value="@item.Quantity" />
+
+            </div>
+        </td>*@
+                            <td>
+                                <a asp-action="MiktarArttir" asp-controller="Home" asp-route-id="@item.Quantity" class="btn btn-outline-dark mt-auto">Miktar arttır</a>
+                             
+                            </td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm">delete</a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
@@ -37,23 +52,23 @@
             </div>
             <div style="border:solid 3px" class="col-md-3">
                 @*<div class="card">
-                    <div class="card-body">*@
-                        <label><b><i>HAVE COUPON ?</i></b></label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Coupon code" />
-                            <span class="input-group-append">
-                                <button class="btn btn-success">Apply</button>
-                            </span>
-                        </div>
-                        @*</div>*@
-                    @*</div>*@
+        <div class="card-body">*@
+                <label><b><i>HAVE COUPON ?</i></b></label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Coupon code" />
+                    <span class="input-group-append">
+                        <button class="btn btn-success">Apply</button>
+                    </span>
+                </div>
+                @*</div>*@
+                @*</div>*@
                 @*<div class="card">
-                    <div class="card-body">*@
-                        <h5>TOTAL PRICE: @totalPrice $</h5>
-                        <a href="#" class="btn btn-primary">Complete Cart</a>
-                        <a href="#" class="btn btn-primary">Continue</a>
-                    @*</div>
-                </div>*@
+        <div class="card-body">*@
+                <h5>TOTAL PRICE: @totalPrice $</h5>
+                <a asp-action="Index" asp-controller="Order" class="btn btn-primary">Complete Cart</a>
+                <a href="#" class="btn btn-primary">Continue</a>
+                @*</div>
+        </div>*@
             </div>
         </div>
     </div>

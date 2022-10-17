@@ -41,11 +41,11 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                @*<li class="nav-item d-none d-sm-inline-block">
                     <a asp-action="Index" asp-controller="Home" asp-area="Admin" class="btn btn-success">HOME</a>
-                </li>
+                </li>*@
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-primary">HOME</a>
+                    <a asp-action="Index" asp-controller="Home" asp-area="" class="btn btn-primary">MEMBER PAGE</a>
                 </li>
             </ul>
 
@@ -207,13 +207,21 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
 
                         <li class="nav-item">
                             <a asp-action="Index" asp-controller="Home" asp-area="Admin" class="nav-link">
                                 <i class="nav-icon far fa-home"></i>
                                 <p>
-                                    Dashboard
+                                    HOME
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="User" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon far fa-folder-open"></i>
+                                <p>
+                                    USER
                                 </p>
                             </a>
                         </li>
@@ -221,7 +229,7 @@
                             <a asp-action="Index" asp-controller="Category" asp-area="Admin" class="nav-link">
                                 <i class="nav-icon far fa-folder-open"></i>
                                 <p>
-                                    Category
+                                    CATEGORY
 
                                 </p>
                             </a>
@@ -230,8 +238,23 @@
                             <a asp-action="Index" asp-controller="Product" asp-area="Admin" class="nav-link">
                                 <i class="nav-icon far fa-folder-open"></i>
                                 <p>
-                                    Product
-
+                                    PRODUCT
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Order" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon far fa-folder-open"></i>
+                                <p>
+                                    ORDER
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="OrderDetail" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon far fa-folder-open"></i>
+                                <p>
+                                    ORDER DETAILS
                                 </p>
                             </a>
                         </li>

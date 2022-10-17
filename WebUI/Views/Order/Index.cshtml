@@ -1,0 +1,60 @@
+﻿@model List<CartItem>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal totalPrice = 0; // sipariş özeti toplam fiyatını temsil ediyor.
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">HESAP ÖZETİ</h3>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+                <table class="table table-danger table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            totalPrice += item.SubTotal;
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.UnitPrice</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5>Total Price: @totalPrice $</h5>
+                    <div class="form-group mt-2">
+                        <label>Payment Method</label>
+                        <select>
+                            <option>Money Order</option>
+                            <option>Bankcard</option>
+                            <option>Paying at the door</option>
+                        </select>
+                    </div>
+                    <a asp-action="CompleteCart" asp-controller="Order" class="btn btn-primary mt-3">Complete Cart</a>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework.Context
 {
-    public class ProjectContext : IdentityDbContext
+    public class ProjectContext : IdentityDbContext<AppUser,AppUserRole,int>
     {
         public ProjectContext(DbContextOptions<ProjectContext> options) : base(options)
         {
@@ -16,6 +16,9 @@ namespace DataAccess.Concrete.EntityFramework.Context
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Shipper> Shippers { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

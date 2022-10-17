@@ -1,9 +1,11 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,7 +29,7 @@ namespace WebUI.Areas.Admin.Controllers
             TempData["Title"] = "PRODUCTS";
             var products = productService.GetProductDetails().ToList();
            
-
+           
            
             return View(products);
         }
@@ -43,10 +45,51 @@ namespace WebUI.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(Product product, IFormFile imageFile) 
         {
-            productService.CreateProduct(product);
-            return View();
+
+            try
+            {
+                string path;
+                if (imageFile == null)
+                {
+                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\", "no-image.jpg");
+                    product.ImagePath = "no-image.jpg";
+                    return View();
+                }
+                else
+                {
+                    //görsel ismi değiştirme
+                    var newFileName = "";
+                    var uniqeName = Guid.NewGuid();
+                    var fileArray = imageFile.FileName.Split('.');
+                    var extension = fileArray[fileArray.Length - 1].ToLower();
+                    newFileName = uniqeName + "." + extension;
+
+
+                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\", imageFile.FileName);
+
+                    //FileStream stream = new FileStream(path, FileMode.Create);
+                    //await imageFile.CopyToAsync(stream);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+                    product.ImagePath = newFileName;
+                    productService.CreateProduct(product);
+                    TempData["result"] = "ürün eklendi";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["result"] = ex.Message;
+                return View();
+            }
+
+            //productService.CreateProduct(product);
+            //return View();
         }
         public IActionResult Delete(int id)
         {

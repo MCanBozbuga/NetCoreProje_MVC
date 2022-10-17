@@ -73,37 +73,13 @@ html {
 
 
 body {
-    /* Margin bottom by footer height */
-    /*background-repeat:no-repeat;*/
-    background-image: url(../images/arkaplan.webp);
-    animation: image 10s infinite alternate;
-    -webkit-animation: image 10s infinite alternate;
-    -moz-animation: image 10s infinite alternate;
 
+
+   
     float: initial;
     margin-bottom: 60px;
 }
-@keyframes image {
-    0% {
-      background-image: url(../images/kapadokya-2.jpg);
-    }
 
-    /*25% {
-        background-image: url(../images/arkaplan.webp);
-    }
-*/
-    /*50% {
-        background-image: url(../images/kapadokya-2.jpg);
-    }*/
-
-  /*  75% {
-        background-image: url(../images/arkaplan.webp);
-    }*/
-
-   /* 100% {
-        background-image: url(../images/4.jpg);
-    }*/
-}
 .footer {
   position: absolute;
   bottom: 0;

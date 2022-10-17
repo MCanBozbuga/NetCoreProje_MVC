@@ -1,0 +1,56 @@
+﻿@model RegisterDTO
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-md-6 mx-auto p-2 ">
+        <div class="card">
+            <div class="card-header">
+                <h2>USER REGISTER</h2>
+
+                @{if (TempData["result"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["result"]
+                        </div>
+                    }
+
+                }
+
+
+
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="mt-2">
+                        <label><i><b>USERNAME</b></i></label>
+                        <span style="color:red" asp-validation-for="Username"></span>
+                        <input type="text" placeholder="Enter Username" class="form-control" asp-for="Username" />
+                    </div>
+                    <div class="mt-2">
+                        <label><i><b>EMAIL</b></i></label>
+                        <span style="color:red" asp-validation-for="Email"></span>
+                        <input type="text" placeholder="Enter Email" class="form-control" asp-for="Email" />
+                    </div>
+                    <div class="mt-2">
+                        <label><i><b>PASSWORD</b></i></label>
+                        <span style="color:red" asp-validation-for="Password"></span>
+                        <input type="password" placeholder="Enter Password" class="form-control" asp-for="Password" />
+                    </div>
+                    <div class="mt-2">
+                        <label><i><b>CONFIRM PASSWORD</b></i></label>
+                        <span style="color:red" asp-validation-for="ConfirmPassword"></span>
+                        <input type="password" placeholder="Enter ConfirmPassword" class="form-control" asp-for="ConfirmPassword" />
+                    </div>
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary ml-auto">REGISTER</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ 
+</div>
+

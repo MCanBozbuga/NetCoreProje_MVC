@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
 
 
 <div id="deneme">
@@ -9,24 +9,20 @@
         {
 
             <li class="nav-item">
-                <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">HELLO :) @User.Identity.Name</a>
+                <a class="nav-link" asp-action="Index" asp-controller="Home"> HELLO :) @User.Identity.Name</a>
             </li>
             <li class="nav-item">
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
-                </form>
+                <a class="nav-link" asp-action="Logout" asp-controller="Membership">Logout</a>
             </li>
-            
-
 
         }
         else
         {
             <li id="basliklar" class="nav-item">
-                <i><b><a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">REGISTER</a></b></i>
+                <i><b><a class="btn btn-primary"  asp-action="Register" asp-controller="Membership">REGISTER</a></b></i>
             </li>
             <li id="basliklar" class="nav-item">
-                <i><b><a class="btn btn-success ml-2" asp-area="Identity" asp-page="/Account/Login">LOGIN</a></b></i>
+                <i><b><a class="btn btn-success ml-2"  asp-action="Login" asp-controller="Membership">LOGIN</a></b></i>
             </li>
             
 

@@ -1,4 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Common;
+using Entities.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,10 +17,18 @@ namespace WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly IProductService productService;
+        private readonly UserManager<AppUser> userManager;
+        private readonly SignInManager<AppUser> signInManager;
+        private readonly IOrderDetailService orderDetailService;
+        private readonly IOrderService orderService;
 
-        public HomeController(IProductService productService)
+        public HomeController(IProductService productService, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IOrderDetailService orderDetailService, IOrderService orderService)
         {
             this.productService = productService;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.orderDetailService = orderDetailService;
+            this.orderService = orderService;
         }
 
         public IActionResult Index()
@@ -26,6 +37,7 @@ namespace WebUI.Controllers
             var products = productService.GetProductDetails().ToList();
             return View(productService.GetProductDetails().ToList());
         }
+      
         public IActionResult AddToCart(int id)
         {
             Cart cartSession;
@@ -38,8 +50,6 @@ namespace WebUI.Controllers
             {
                 cartSession = SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet");
             }
-
-            //Cart cartSession = SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet") == null ? new Cart() : SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet");
 
             var newProduct = productService.Get(id);
 
@@ -67,7 +77,43 @@ namespace WebUI.Controllers
             return RedirectToAction("Index");
         }
 
+        //public async Task <IActionResult> CompleteCard()
+        //{
+        //    Cart cart = SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet");
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        Random rnd = new Random();
+        //        var user = await userManager.GetUserAsync(User);
+        //        Order order = new Order();
+        //        order.User = user;
+        //        order.OrderNumber = rnd.Next(1, 10000).ToString();
+        //        OrderDetail orderDetail = new OrderDetail();
+
+
+        //        foreach (var item in cart.MyCart)
+        //        {
+        //            Product product = productService.Get(item.Id);
+        //            product.ProductName = item.ProductName;
+        //            product.UnitPrice = item.UnitPrice;
+        //            orderDetail.Product = product;
+        //            orderDetail.Quantity = Convert.ToInt16(item.Quantity);
+        //            orderDetail.UnitPrice = item.UnitPrice;
+        //            //orderDetail.Product.ProductName = item.ProductName;
+        //            //orderDetail.Quantity = Convert.ToInt16(item.Quantity);
+
+        //        }
+        //        order.OrderDetails.Add(orderDetail);
+        //        orderService.CreateOrder(order);
+        //        orderDetailService.CreateOrderDetail(orderDetail);
+        //        MailSender.SendEmail(user.Email, "Siparişiniz Oluşturuldu", $"#{order.OrderNumber} numaralı siparişiniz oluşturuldu. Kargoya verdiğimizde sizi bilgilendireceğiz!");
+        //        SessionHelper.RemoveSession(HttpContext.Session, "sepet");
+        //        return View(order);
+        //    }
+        //    return RedirectToAction("Index");
+        //}
     }
 
-}
+ }
+
+
 

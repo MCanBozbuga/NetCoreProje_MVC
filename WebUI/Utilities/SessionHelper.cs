@@ -38,5 +38,11 @@ namespace WebUI.Utilities
             //return result == null ? default(T) : JsonConvert.DeserializeObject<T>(result);
         }
 
+        //Remove
+        public static void RemoveSession(this ISession session , string key)
+        {
+            session.Remove(key);
+        }
+
     }
 }
